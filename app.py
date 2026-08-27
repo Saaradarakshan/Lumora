@@ -1,6 +1,6 @@
 # app.py
 
-# To run: streamlit run app.py
+# To run: streamlit run app.py OR python -m streamlit run app.py
 
 import streamlit as st
 import plotly.graph_objects as go

@@ -1,89 +1,112 @@
-# gemini_advisor.py
-import google.generativeai as genai
-import os
-from dotenv import load_dotenv
+# simplified_gemini_advisor.py
 from typing import Set, Optional
 
-# Load environment variables
-load_dotenv()
-
-# Configure Gemini
-API_KEY = os.getenv("GEMINI_API_KEY")
-
-if not API_KEY:
-    raise ValueError("❌ GEMINI_API_KEY not found in .env file. Please add it.")
-
-genai.configure(api_key=API_KEY)
-
-# ✅ UPDATED: Use newer model
-model = genai.GenerativeModel("gemini-1.5-flash")  # or "gemini-pro"
-
 def generate_career_advice(user_skills: Set[str], goal: str, level: str, top_course=None):
-    """Generate personalized career advice using Gemini"""
+    """Generate career advice (without Gemini fallback)"""
     
     skills_str = ", ".join(user_skills) if user_skills else "Not specified"
+    course_name = top_course.name if top_course and hasattr(top_course, 'name') else "Not specified"
     
-    prompt = f"""
-You are an expert career counselor and learning path advisor.
+    return f"""
+# 🚀 Personalized Career Report
 
-Student Profile:
-- Goal: {goal}
-- Current Skills: {skills_str}
-- Experience Level: {level}
-- Top Recommended Course: {top_course.name if top_course else "Not specified"}
+## 1. Career Path Overview
+Based on your goal of becoming a **{goal}**, here's your personalized roadmap.
 
-Please provide a comprehensive career and learning advice report including:
+### Current Status:
+- You already know: {skills_str}
+- Your level: {level}
+- Recommended starting point: {course_name}
 
-1. **Career Path Overview**
-   - Explain what the student needs to achieve their goal
-   - Realistic timeline and expectations
+### Timeline:
+- **3-6 months** to build core skills
+- **6-12 months** to become job-ready
+- **12-18 months** to advance to senior roles
 
-2. **Skill Analysis**
-   - Skills they already have
-   - Critical missing skills
-   - Recommended order to learn missing skills
+---
 
-3. **Learning Strategy**
-   - Study tips for their experience level
-   - Recommended projects to build portfolio
-   - Online resources and communities to join
+## 2. Skill Analysis
 
-4. **Career Opportunities**
-   - Job roles matching this path
-   - Expected salary ranges
-   - Companies hiring in this space
+### Skills You Already Have ✅
+{', '.join(user_skills) if user_skills else "None listed"}
 
-5. **Motivation & Next Steps**
-   - Daily/weekly study plan
-   - Milestones to celebrate
-   - Encouraging advice
+### Skills to Focus On 🎯
+Based on your goal of becoming a {goal}, focus on:
+1. **Core Fundamentals** - Build strong foundations
+2. **Technical Skills** - Learn tools and technologies
+3. **Practical Experience** - Build projects
+4. **Soft Skills** - Communication, teamwork, problem-solving
 
-Format the response with clear headings, bullet points, and motivational language.
-Keep it practical and actionable.
-"""
-    
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        return f"""
-# AI Career Report (Error)
+### Recommended Learning Order:
+1. Start with foundational concepts
+2. Move to intermediate topics
+3. Build projects to apply learning
+4. Advance to specialized topics
 
-⚠️ **Error connecting to Gemini AI**
+---
 
-Error details: {str(e)}
+## 3. Learning Strategy
 
-Please check:
-1. Your API key is correct in .env file
-2. You have internet connection
-3. The Gemini API is accessible
+### Daily Study Plan (2 hours/day):
+- **30 min** - Theory/Concepts
+- **60 min** - Hands-on practice
+- **30 min** - Project work
 
-**In the meantime:**
+### Weekly Goals:
+- Complete 1-2 modules
+- Build 1 small project
+- Practice coding daily
 
-Continue with your learning path. Focus on:
-- Starting with foundational courses
-- Building projects alongside learning
-- Joining communities related to your goal
+### Resources:
+- Online courses (Coursera, edX, Udemy)
+- YouTube tutorials
+- Documentation and blogs
+- Community forums (Stack Overflow, Reddit)
 
-Good luck with your learning journey!
+---
+
+## 4. Career Opportunities
+
+### Job Roles:
+- Entry-level positions
+- Junior developer/analyst
+- Internships
+- Freelance opportunities
+
+### Companies Hiring:
+- Tech companies
+- Startups
+- Consulting firms
+- Non-tech companies with tech departments
+
+### Salary Ranges:
+- Entry: $60,000 - $80,000/year
+- Mid-level: $80,000 - $120,000/year
+- Senior: $120,000 - $160,000/year
+
+---
+
+## 5. Motivation & Next Steps
+
+### Immediate Actions (Next 7 Days):
+- [ ] Complete 1-2 beginner courses
+- [ ] Set up your development environment
+- [ ] Join 1 online community
+- [ ] Build your first small project
+
+### Milestones to Celebrate:
+- 🎉 Complete first course
+- 🎉 Build first project
+- 🎉 Get first certificate
+- 🎉 Apply to first job
+
+### Encouragement:
+Remember: Every expert was once a beginner. Consistent effort > Perfection.
+
+**You've got this!** 💪
+
+---
+
+*This report was generated by PathPilot AI*
+*Visit us at: https://pathpilot.streamlit.app*
 """
