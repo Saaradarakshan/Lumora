@@ -1,3 +1,8 @@
 .env
 venv/
 .venv/
+__pycache__/
+*.pyc
+*.db
+lumora.db
+Career_Report.txt
