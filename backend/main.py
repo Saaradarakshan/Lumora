@@ -17,7 +17,7 @@ logger = logging.getLogger("lumora-api")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Lumora API",
+    title="PathPilot API",
     description="Intelligent Learning Path and Career Navigation Backend API",
     version="1.1.0"
 )
@@ -80,7 +80,7 @@ def on_startup():
 def root():
     return {
         "status": "healthy",
-        "message": "Lumora AI Navigation API is operational",
+        "message": "PathPilot AI Navigation API is operational",
         "docs": "/docs"
     }
 

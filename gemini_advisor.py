@@ -5,7 +5,7 @@ from typing import Set, Optional
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-logger = logging.getLogger("lumora-advisor")
+logger = logging.getLogger("PathPilot-advisor")
 load_dotenv()
 
 DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")

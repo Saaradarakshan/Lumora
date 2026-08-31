@@ -1,6 +1,6 @@
 # app.py
 """
-Lumora - Career & Learning Navigation System
+PathPilot AI - Career & Learning Navigation System
 Personalized Learning Roadmaps, Skill Gap Analytics & Mentorship
 """
 
@@ -22,7 +22,7 @@ import gemini_advisor
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000/api")
 
 st.set_page_config(
-    page_title="Lumora - Career & Learning Navigator",
+    page_title="PathPilot AI - Career & Learning Navigator",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -198,7 +198,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Header ───────────────────────────────────────────────────────────────────
-st.markdown('<h1 class="main-header">Lumora Career Navigator</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">PathPilot Career Navigator</h1>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Your Personalized Learning Roadmap, Skill Gap Analyzer & Career Mentor</div>', unsafe_allow_html=True)
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
@@ -213,7 +213,7 @@ with st.sidebar:
     - **Build Projects**: Apply your new skills to create standout portfolio projects.
     """)
     st.markdown("---")
-    st.caption("Lumora Navigator • Empowering Your Career Journey")
+    st.caption("PathPilot Navigator • Empowering Your Career Journey")
 
 # ── Recommendation Fetchers ──────────────────────────────────────────────────
 def fetch_course_recommendations(payload):
@@ -487,7 +487,7 @@ with tab5:
             st.download_button(
                 "📥 Download Career Plan (.txt)",
                 data=st.session_state.advice,
-                file_name=f"Lumora_Career_Plan_{st.session_state.goal.replace(' ', '_')}.txt",
+                file_name=f"PathPilot_Career_Plan_{st.session_state.goal.replace(' ', '_')}.txt",
                 mime="text/plain"
             )
     else:
